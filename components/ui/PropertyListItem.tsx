@@ -1,29 +1,24 @@
 import { Bath, Bed, Car, Eye, MapPin, Ruler } from "lucide-react";
 import Image from "next/image";
-import {
-  AwaitedReactNode,
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-} from "react";
+import { Key } from "react";
+
 import { PropertyCardProps } from "./PropertyCard";
 import TransitionLink from "./TransitionLink";
 
 // Property List Item Component
 const PropertyListItem: React.FC<PropertyCardProps> = ({ property }) => {
   console.log("PropertyListItem", property);
+
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-md transition-shadow">
       <div className="flex flex-col md:flex-row">
         <div className="relative md:w-80 h-48 md:h-auto">
           <TransitionLink href={`/project/${property.slug}`}>
             <Image
-              src={property.image || property.propertyImages?.[0]?.url || ""}
-              alt={property.name}
               fill
+              alt={property.name}
               className="object-cover hover:scale-105 transition-transform duration-300"
+              src={property.image || property.propertyImages?.[0]?.url || ""}
             />
             {property.isFeatured && (
               <>
@@ -92,29 +87,14 @@ const PropertyListItem: React.FC<PropertyCardProps> = ({ property }) => {
               <div className="flex flex-wrap gap-1">
                 {property.amenities
                   .slice(0, 3)
-                  .map(
-                    (
-                      amenity:
-                        | string
-                        | number
-                        | bigint
-                        | boolean
-                        | ReactElement<any, string | JSXElementConstructor<any>>
-                        | Iterable<ReactNode>
-                        | ReactPortal
-                        | Promise<AwaitedReactNode>
-                        | null
-                        | undefined,
-                      index: Key | null | undefined
-                    ) => (
-                      <span
-                        key={index}
-                        className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
-                      >
-                        {amenity}
-                      </span>
-                    )
-                  )}
+                  .map((amenity: any, index: Key | null | undefined) => (
+                    <span
+                      key={index}
+                      className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
+                    >
+                      {amenity}
+                    </span>
+                  ))}
                 {property.amenities.length > 3 && (
                   <span className="text-gray-500 text-xs">
                     +{property.amenities.length - 3}
@@ -128,4 +108,5 @@ const PropertyListItem: React.FC<PropertyCardProps> = ({ property }) => {
     </div>
   );
 };
+
 export default PropertyListItem;

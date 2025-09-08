@@ -1,13 +1,7 @@
 import { Bath, Bed, Eye, MapPin, Ruler } from "lucide-react";
 import Image from "next/image";
-import {
-  AwaitedReactNode,
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-} from "react";
+import { Key } from "react";
+
 import TransitionLink from "./TransitionLink";
 export interface PropertyCard {
   id: number;
@@ -54,10 +48,10 @@ const PropertyCardItem: React.FC<PropertyCardProps> = ({ property }) => {
         <TransitionLink href={`/project/${property.slug}`}>
           <div className="relative h-48 overflow-hidden">
             <Image
-              src={property.image}
-              alt={property.name}
               fill
+              alt={property.name}
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              src={property.image}
             />
             {property?.isFeatured && (
               <div className="absolute top-3 left-3 bg-gradient-primary text-white px-2 py-1 rounded text-xs font-medium">
@@ -140,29 +134,14 @@ const PropertyCardItem: React.FC<PropertyCardProps> = ({ property }) => {
             <div className="flex flex-wrap gap-1">
               {property?.amenities
                 .slice(0, 2)
-                .map(
-                  (
-                    amenity:
-                      | string
-                      | number
-                      | bigint
-                      | boolean
-                      | ReactElement<any, string | JSXElementConstructor<any>>
-                      | Iterable<ReactNode>
-                      | ReactPortal
-                      | Promise<AwaitedReactNode>
-                      | null
-                      | undefined,
-                    index: Key | null | undefined
-                  ) => (
-                    <span
-                      key={index}
-                      className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
-                    >
-                      {amenity}
-                    </span>
-                  )
-                )}
+                .map((amenity: any, index: Key | null | undefined) => (
+                  <span
+                    key={index}
+                    className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
+                  >
+                    {amenity}
+                  </span>
+                ))}
               {property.amenities.length > 2 && (
                 <span className="text-gray-500 text-xs">
                   +{property.amenities.length - 2} tiện ích
@@ -175,4 +154,5 @@ const PropertyCardItem: React.FC<PropertyCardProps> = ({ property }) => {
     </div>
   );
 };
+
 export default PropertyCardItem;
