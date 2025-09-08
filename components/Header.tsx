@@ -11,7 +11,6 @@ import {
 import { usePathname } from "next/navigation";
 
 import { BackToTop } from "./BackToTop";
-import { DarkModeToggle } from "./DarkModeToggle";
 import TransitionLink from "./ui/TransitionLink";
 
 const navItems = [
@@ -56,7 +55,7 @@ export const Header: React.FC = () => {
               ))}
             </div>
 
-            <DarkModeToggle />
+            {/* <DarkModeToggle /> */}
           </div>
         </div>
       </nav>

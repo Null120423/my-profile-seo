@@ -1,11 +1,11 @@
-import FloatingContact from "@/components/FloatingContact";
-import { ThemeProvider } from "@/components/theme-provider";
-import StaticLoadingScreen from "@/components/ui/StaticLoadingScreen";
+import { Inter } from "next/font/google";
 
+import FloatingContact from "@/components/FloatingContact";
 import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ThemeProvider } from "@/components/theme-provider";
+import StaticLoadingScreen from "@/components/ui/StaticLoadingScreen";
 import { LOGO, SITE_URL } from "@/lib/data";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" suppressHydrationWarning>
+    <html suppressHydrationWarning lang="vi">
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -31,15 +31,15 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
           crossOrigin=""
+          href="https://fonts.gstatic.com"
+          rel="preconnect"
         />
         <meta
-          name="google-site-verification"
           content="g-qYu8lTTExle2xgjSpnTJTZXtIMPmAnLJOyGhhpQlE"
+          name="google-site-verification"
         />
         <script
           async
@@ -70,12 +70,12 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" storageKey="my-profile-theme">
           <StaticLoadingScreen />
           <Header />
-
-          <main className="max-w-7xl pt-64 mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+          <main className="max-w-7xl pt-24 mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
             {children}
-            <Footer />
+
             <FloatingContact />
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
