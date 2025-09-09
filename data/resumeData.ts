@@ -1,110 +1,62 @@
-export interface Experience {
-  company: string;
-  position: string;
-  duration: string;
-  description: string;
-  technologies: string[];
-}
-
-export interface Education {
-  institution: string;
-  degree: string;
-  duration: string;
-  description?: string;
-}
-
-export interface Skill {
-  category: string;
-  items: string[];
-}
-
 export const resumeData = {
   personal: {
-    name: "Trần Hữu Tài  (Dev On Wheels)",
-    title: "Full-Stack Developer",
-    email: "codeonw@gmail.com",
-    phone: "+ 376 100 548",
-    location: "Binh Dinh, Viet Nam",
-    website: "https://alexjohnson.dev",
-    linkedin:
-      "https://www.linkedin.com/in/huu-tai-fullstack-developer-3b1b90252/",
-    github: "https://github.com/Null120423",
+    name: "Trần Hữu Tài",
+    title: "Fullstack Developer",
+    address:
+      "Thủ Đức, Việt Nam, 60 Đ Làng Tăng Phú, Tăng Nhơn Phú A, Thủ Đức, Hồ Chí Minh",
+    email: "huutaidev@gmail.com",
+    phone: "0376100548",
+    website: "https://devonwheels.id.vn/",
+    github: "https://github.com/username",
+    linkedin: "https://linkedin.com/in/username",
   },
   summary:
-    "Passionate full-stack developer with 6+ years of experience building scalable web applications. Expertise in React, Node.js, and cloud technologies. Strong advocate for clean code, testing, and agile development practices.",
+    "I am a careful Fullstack Developer who wants to create clean and high-quality products. I like coding and always try to learn new things to improve my skills and work better. Besides coding, I enjoy traveling and discovering new places, which gives me more ideas and helps me solve problems.",
+  websites: [
+    {
+      label: "Personal Website:",
+      url: "https://devonwheels.id.vn/",
+    },
+    {
+      label: "Hodos Project:",
+      url: "https://hodos-admin.gitlabserver.id.vn/landing",
+    },
+    {
+      label: "Portfolio:",
+      url: "https://devonwheels.id.vn/portfolio/1",
+    },
+  ],
   experience: [
     {
-      company: "TechCorp Inc.",
-      position: "Full-Stack Developer",
-      duration: "2022 - Present",
+      position: "Fullstack Developer",
+      company:
+        "APETECHS Solution - 66 đường D, LakeView, Phường An Phú, Thành phố Thủ Đức, Thành phổ Hồ Chí Minh",
+      duration: "Mar 2024",
       description:
-        "Lead development of microservices architecture serving 1M+ users. Mentor junior developers and drive technical decisions for the platform team.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "PostgreSQL",
-        "AWS",
-        "Docker",
-      ],
+        "Innovative Fullstack Developer with 1.5 years of experience, specializing in building dynamic and user-friendly applications using React Native and NestJS APIs, Mobile (React Native). Experienced in UI/UX optimization, code performance improvement, and integration of Firebase, GPS, and location-based services. Backend (NestJS): Skilled in designing and developing REST APIs, database management, third-party systems (e.g., Payrol, Sepay), and building scalable server-side solutions. Domain Knowledge: Gained hands-on experience with real business workflows such as boarding house management, warehouse management for F&B chains, and procurement processes for production.",
+      technologies: [],
     },
-    {
-      company: "StartupXYZ",
-      position: "Full-Stack Developer",
-      duration: "2020 - 2022",
-      description:
-        "Built the core platform from ground up, implementing real-time features and payment systems. Reduced load times by 60% through optimization.",
-      technologies: ["Vue.js", "Express.js", "MongoDB", "Redis", "Stripe API"],
-    },
-    {
-      company: "WebSolutions Ltd.",
-      position: "Frontend Developer",
-      duration: "2018 - 2020",
-      description:
-        "Developed responsive web applications for various clients. Collaborated with designers to implement pixel-perfect UIs.",
-      technologies: ["React", "SASS", "JavaScript", "REST APIs", "Git"],
-    },
-  ] as Experience[],
+  ],
+  skills: [
+    "NestJS",
+    "ReactJs",
+    "Angular Js",
+    "MySQL",
+    "PostgreSQL",
+    "Ubuntu",
+    "Android Studio",
+    "Jetpack Compose",
+    "Java",
+  ],
+  languages: ["English", "Vietnamese"],
   education: [
     {
-      institution: "University of California, Berkeley",
-      degree: "Bachelor of Science in Computer Science",
-      duration: "2014 - 2018",
+      degree: "Bachelor's Degree in Information Technology",
+      institution: "Ton Duc Thang University",
+      duration: "2021 — 2025",
       description:
-        "Graduated Magna Cum Laude. Relevant coursework: Data Structures, Algorithms, Software Engineering, Database Systems.",
+        "Completed core and advanced courses including programming fundamentals, algorithms, object-oriented programming (OOP), and data structures. Beyond coursework, proactively self-studied modern technologies such as UI libraries for web and mobile development, and other emerging frameworks/tools to strengthen practical skills for both academic projects and professional work.",
     },
-  ] as Education[],
-  skills: [
-    {
-      category: "Frontend",
-      items: [
-        "React",
-        "Vue.js",
-        "TypeScript",
-        "JavaScript",
-        "TailwindCSS",
-        "SASS",
-        "Next.js",
-      ],
-    },
-    {
-      category: "Backend",
-      items: [
-        "Node.js",
-        "Express.js",
-        "Python",
-        "FastAPI",
-        "REST APIs",
-        "GraphQL",
-      ],
-    },
-    {
-      category: "Database",
-      items: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Prisma"],
-    },
-    {
-      category: "DevOps & Tools",
-      items: ["AWS", "Docker", "Git", "GitHub Actions", "Vercel", "Netlify"],
-    },
-  ] as Skill[],
+  ],
+  hobbies: ["Passion for road trips"],
 };
