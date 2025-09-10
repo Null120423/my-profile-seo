@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React from "react";
 
 const resume = {
@@ -127,13 +126,7 @@ const resume = {
 const ResumePDFScreen: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 px-4">
-      <motion.section
-        className="max-w-5xl mx-auto w-full"
-        initial={{ opacity: 0, y: 40 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true, amount: 0.5 }}
-        whileInView={{ opacity: 1, y: 0 }}
-      >
+      <div className="max-w-5xl mx-auto w-full">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-wide text-center">
           {resume.name}
         </h1>
@@ -286,7 +279,7 @@ const ResumePDFScreen: React.FC = () => {
             ))}
           </ul>
         </section>
-      </motion.section>
+      </div>
     </div>
   );
 };
