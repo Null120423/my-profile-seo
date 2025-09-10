@@ -122,7 +122,6 @@ const resume = {
     },
   ],
 };
-
 const ResumePDFScreen: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 px-4">
