@@ -1,11 +1,10 @@
 function Footer() {
   return (
-    <footer className="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+    <footer className="bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center text-gray-600 dark:text-gray-400">
+        <div className="text-center text-gray-500 font-light">
           <p>
-            &copy; 2024 Trần Hữu Tài (Dev On Wheels). Built with React and
-            TailwindCSS.
+            &copy; 2024 Dev On Wheels. Built with Next.js and TailwindCSS.
           </p>
         </div>
       </div>

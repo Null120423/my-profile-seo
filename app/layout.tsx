@@ -70,7 +70,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" storageKey="my-profile-theme">
           <StaticLoadingScreen />
           <Header />
-          <main className="max-w-7xl pt-24 mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+          <main className="pt-16 relative">
             {children}
 
             <FloatingContact />
