@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import {
   Download,
   ExternalLink,
@@ -57,6 +58,9 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
   const [imageError, setImageError] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+
+  // Animation state for modal
+  const [modalVisible, setModalVisible] = useState(false);
 
   const imageUrl = imageError ? errorFallback : src || placeholder;
 
@@ -123,6 +127,7 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
 
     if (isModalOpen) {
       document.addEventListener("keydown", handleKeyDown);
+
       return () => document.removeEventListener("keydown", handleKeyDown);
     }
   }, [isModalOpen, closeModal]);
@@ -133,6 +138,17 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setModalVisible(true);
+    } else {
+      // Delay unmount for fade-out
+      const timeout = setTimeout(() => setModalVisible(false), 250);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isModalOpen]);
 
   const handleZoomIn = () => {
     setZoom((prev) => Math.min(prev + 0.25, 5));
@@ -160,10 +176,12 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
+
       link.href = url;
 
       // Extract filename from URL or use alt text
       const filename = src.split("/").pop()?.split("?")[0] || alt || "image";
+
       link.download = filename;
 
       document.body.appendChild(link);
@@ -218,73 +236,80 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
     <>
       {/* Main Image */}
       <div
+        className={`relative group overflow-hidden rounded-lg ${className}`}
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
         }}
-        className={`relative group overflow-hidden rounded-lg ${className}`}
       >
         {/* Loading spinner */}
         {imageLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600"></div>
+          <div className="absolute inset-0 flex items-center justify-center bg-primary-100">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600" />
           </div>
         )}
-
         {fill ? (
           <Image
-            src={imageUrl}
-            alt={alt}
             fill
+            alt={alt}
+            className="object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
+            priority={priority}
+            quality={quality}
             sizes={
               sizes ||
               "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             }
-            quality={quality}
-            priority={priority}
+            src={imageUrl}
+            style={{
+              opacity: imageLoading ? 0.5 : 1,
+              filter: imageLoading ? "blur(4px)" : "none",
+            }}
+            onClick={openModal}
             onError={handleImageError}
             onLoad={handleImageLoad}
-            className="object-cover transition-transform duration-200 group-hover:scale-105 cursor-pointer"
-            onClick={openModal}
           />
         ) : (
           <Image
-            src={imageUrl}
             alt={alt}
-            width={width}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
             height={height}
-            quality={quality}
             priority={priority}
+            quality={quality}
+            src={imageUrl}
+            style={{
+              opacity: imageLoading ? 0.5 : 1,
+              filter: imageLoading ? "blur(4px)" : "none",
+            }}
+            width={width}
+            onClick={openModal}
             onError={handleImageError}
             onLoad={handleImageLoad}
-            className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105 cursor-pointer"
-            onClick={openModal}
           />
         )}
 
         {/* Action Overlay */}
         {showActions && (
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/10 bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-2">
               <button
+                className="bg-white text-primary-800 p-2 rounded-full hover:bg-primary-100 transition-colors"
+                title="Preview"
                 onClick={(e) => {
                   e.stopPropagation();
                   openModal();
                 }}
-                className="bg-white text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors"
-                title="Preview"
               >
                 <Eye className="w-4 h-4" />
               </button>
 
               {allowDownload && (
                 <button
+                  className="bg-white text-primary-800 p-2 rounded-full hover:bg-primary-100 transition-colors"
+                  title="Download"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDownload();
                   }}
-                  className="bg-white text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors"
-                  title="Download"
                 >
                   <Download className="w-4 h-4" />
                 </button>
@@ -292,12 +317,12 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
 
               {allowExternalLink && (
                 <button
+                  className="bg-white text-primary-800 p-2 rounded-full hover:bg-primary-100 transition-colors"
+                  title="Open in new tab"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleExternalLink();
                   }}
-                  className="bg-white text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors"
-                  title="Open in new tab"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </button>
@@ -307,82 +332,85 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
         )}
       </div>
 
-      {/* Modal */}
-      {isModalOpen && (
+      {/* Modal with fade/slide animation */}
+      {modalVisible && (
         <div
-          className={`fixed top-0 right-0 bottom-0 left-0 z-[100000] bg-black transition-colors duration-300 ${
-            isFullscreen ? "bg-opacity-100" : "bg-opacity-80"
+          className={`fixed top-0 right-0 bottom-0 left-0 z-[100000] bg-black/50 transition-all duration-300 ${
+            isModalOpen
+              ? "bg-opacity-80 opacity-100 translate-y-0"
+              : "bg-opacity-0 opacity-0 -translate-y-8 pointer-events-none"
           }`}
+          style={{ transitionProperty: "opacity, background, transform" }}
           onClick={closeModal}
         >
           <div className="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center p-4">
             {/* Controls */}
             <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
               <div
+                aria-label="Image controls"
                 className="flex gap-2"
                 role="toolbar"
-                aria-label="Image controls"
               >
                 <button
+                  aria-label="Zoom out"
+                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                  title="Zoom Out (-)"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleZoomOut();
                   }}
-                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                  title="Zoom Out (-)"
-                  aria-label="Zoom out"
                 >
                   <ZoomOut className="w-5 h-5" />
                 </button>
 
                 <button
+                  aria-label="Zoom in"
+                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                  title="Zoom In (+)"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleZoomIn();
                   }}
-                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                  title="Zoom In (+)"
-                  aria-label="Zoom in"
                 >
                   <ZoomIn className="w-5 h-5" />
                 </button>
 
                 <button
+                  aria-label="Rotate image"
+                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                  title="Rotate (R)"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleRotate();
                   }}
-                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                  title="Rotate (R)"
-                  aria-label="Rotate image"
                 >
                   <RotateCw className="w-5 h-5" />
                 </button>
 
                 <button
+                  aria-label="Reset view"
+                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                  title="Reset View (0)"
                   onClick={(e) => {
                     e.stopPropagation();
                     resetView();
                   }}
-                  className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                  title="Reset View (0)"
-                  aria-label="Reset view"
                 >
                   <Move className="w-5 h-5" />
                 </button>
 
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFullscreen();
-                  }}
+                  aria-label={
+                    isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
+                  }
                   className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
                   title={
                     isFullscreen ? "Exit Fullscreen (F)" : "Fullscreen (F)"
                   }
-                  aria-label={
-                    isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
-                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFullscreen();
+                  }}
                 >
                   {isFullscreen ? (
                     <Minimize2 className="w-5 h-5" />
@@ -394,21 +422,21 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
 
               <div className="flex gap-2">
                 <span
-                  className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm"
                   aria-label={`Zoom level: ${Math.round(zoom * 100)} percent`}
+                  className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm"
                 >
                   {Math.round(zoom * 100)}%
                 </span>
 
                 {allowDownload && (
                   <button
+                    aria-label="Download image"
+                    className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                    title="Download"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDownload();
                     }}
-                    className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                    title="Download"
-                    aria-label="Download image"
                   >
                     <Download className="w-5 h-5" />
                   </button>
@@ -416,23 +444,23 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
 
                 {allowExternalLink && (
                   <button
+                    aria-label="Open image in new tab"
+                    className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                    title="Open in new tab"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleExternalLink();
                     }}
-                    className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-                    title="Open in new tab"
-                    aria-label="Open image in new tab"
                   >
                     <ExternalLink className="w-5 h-5" />
                   </button>
                 )}
 
                 <button
-                  onClick={closeModal}
+                  aria-label="Close modal"
                   className="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
                   title="Close (Esc)"
-                  aria-label="Close modal"
+                  onClick={closeModal}
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -446,11 +474,12 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
             >
               {/* Use regular img for modal to support transformations */}
               <img
-                src={imageUrl}
                 alt={alt}
                 className={`max-w-none transition-all duration-200 ${
                   zoom > 1 ? "cursor-move" : "cursor-zoom-in"
                 }`}
+                draggable={false}
+                src={imageUrl}
                 style={{
                   transform: `scale(${zoom}) rotate(${rotation}deg) translate(${
                     position.x / zoom
@@ -458,12 +487,11 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
                   maxWidth: isFullscreen ? "none" : "90vw",
                   maxHeight: isFullscreen ? "none" : "90vh",
                 }}
+                onError={handleImageError}
                 onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseUp}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
-                onError={handleImageError}
-                draggable={false}
               />
             </div>
 

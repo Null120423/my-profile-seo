@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 const resume = {
@@ -125,96 +126,85 @@ const resume = {
 
 const ResumePDFScreen: React.FC = () => {
   return (
-    <div className="min-h-screen border-gray-500 border-solid border-2 bg-gray-100 dark:bg-gray-900 flex flex-col lg:flex-row">
-      {/* Main Content */}
-      <main className="flex-1 bg-white dark:bg-gray-800 p-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b pb-6 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
-              {resume.name}
-            </h1>
-            <div className="text-blue-600 dark:text-blue-400 font-semibold text-lg mb-2">
-              {resume.title}
-            </div>
-            <div className="flex flex-wrap gap-4 text-xs text-gray-700 dark:text-gray-300 mb-2">
-              {resume.contact.map((c, i) => (
-                <span key={i} className="flex items-center gap-1">
-                  {c.label === "Website" ? (
-                    <a
-                      className="underline text-blue-600 dark:text-blue-400"
-                      href={c.value}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {c.value}
-                    </a>
-                  ) : (
-                    c.value
-                  )}
-                </span>
-              ))}
-            </div>
-          </div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 py-12 px-4">
+      <motion.section
+        className="max-w-5xl mx-auto w-full"
+        initial={{ opacity: 0, y: 40 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true, amount: 0.5 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-wide text-center">
+          {resume.name}
+        </h1>
+        <div className="text-primary-700 dark:text-primary-400 font-semibold text-lg mb-4 text-center">
+          {resume.title}
         </div>
-        {/* Summary */}
-        <section className="mb-6">
-          <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 tracking-widest mb-2">
-            SUMMARY
+        <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-700 dark:text-gray-300 mb-6">
+          {resume.contact.map((c, i) => (
+            <span key={i} className="flex items-center gap-1">
+              {c.label === "Website" ? (
+                <a
+                  className="underline text-primary-700 dark:text-primary-400"
+                  href={c.value}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {c.value}
+                </a>
+              ) : (
+                c.value
+              )}
+            </span>
+          ))}
+        </div>
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+            Summary
           </h2>
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed border-l-4 border-blue-400 pl-4">
+          <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
             {resume.summary}
           </p>
         </section>
-        {/* Education */}
-        <section className="mb-6">
-          <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 tracking-widest mb-2">
-            EDUCATION
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+            Education
           </h2>
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
-            <div>
-              <div className="font-semibold text-blue-700 dark: text-sm">
-                {resume.education.degree}
-              </div>
-              <div className="text-blue-500 dark:text-blue-200 text-xs mb-1">
-                {resume.education.school}
-              </div>
-            </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-              {resume.education.duration}
-            </div>
+          <div className="font-semibold text-primary-700 dark:text-primary-400 text-base">
+            {resume.education.degree}
           </div>
-          <div className="text-xs text-gray-700 dark:text-gray-300 mb-1">
+          <div className="text-primary-500 dark:text-primary-200 text-sm mb-1">
+            {resume.education.school}
+          </div>
+          <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+            {resume.education.duration}
+          </div>
+          <div className="text-sm text-gray-700 dark:text-gray-300 mb-1">
             GPA: {resume.education.gpa}
           </div>
-          <div className="text-xs text-gray-700 dark:text-gray-300">
+          <div className="text-sm text-gray-700 dark:text-gray-300">
             {resume.education.description}
           </div>
         </section>
-        {/* Experience */}
-        <section className="mb-6">
-          <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 tracking-widest mb-2">
-            EXPERIENCE
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+            Experience
           </h2>
           {resume.experience.map((exp, i) => (
             <div key={i} className="mb-4">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
-                <div>
-                  <div className="font-semibold text-blue-700 dark: text-sm">
-                    {exp.company}
-                  </div>
-                  <div className="text-blue-500 dark:text-blue-200 text-xs mb-1">
-                    {exp.position}
-                  </div>
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                  {exp.duration}
-                </div>
+              <div className="font-semibold text-primary-700 dark:text-primary-400 text-base">
+                {exp.company}
               </div>
-              <div className="text-xs text-gray-700 dark:text-gray-300 mb-1">
+              <div className="text-primary-500 dark:text-primary-200 text-sm mb-1">
+                {exp.position}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                {exp.duration}
+              </div>
+              <div className="text-sm text-gray-700 dark:text-gray-300 mb-1">
                 {exp.location}
               </div>
-              <ul className="list-disc ml-5 text-xs text-gray-700 dark:text-gray-300 space-y-1">
+              <ul className="list-disc ml-5 text-sm text-gray-700 dark:text-gray-300 space-y-1">
                 {exp.details.map((d, j) => (
                   <li key={j}>{d}</li>
                 ))}
@@ -222,34 +212,30 @@ const ResumePDFScreen: React.FC = () => {
             </div>
           ))}
         </section>
-
-        {/* Projects */}
-        <section className="mb-6">
-          <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 tracking-widest mb-2">
-            PROJECTS
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+            Projects
           </h2>
           {resume.projects.map((proj, i) => (
             <div key={i} className="mb-4">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
-                <div className="font-semibold text-blue-700 dark: text-sm">
-                  {proj.title}
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                  {proj.duration}
-                </div>
+              <div className="font-semibold text-primary-700 dark:text-primary-400 text-base">
+                {proj.title}
               </div>
-              <div className="text-xs text-gray-700 dark:text-gray-300 mb-1">
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                {proj.duration}
+              </div>
+              <div className="text-sm text-gray-700 dark:text-gray-300 mb-1">
                 {proj.team}
               </div>
-              <ul className="list-disc ml-5 text-xs text-gray-700 dark:text-gray-300 space-y-1">
+              <ul className="list-disc ml-5 text-sm text-gray-700 dark:text-gray-300 space-y-1">
                 {proj.details.map((d, j) => (
                   <li key={j}>{d}</li>
                 ))}
               </ul>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                 {proj.technologies}
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                 {proj.impact}
               </div>
               {proj.links && (
@@ -257,7 +243,7 @@ const ResumePDFScreen: React.FC = () => {
                   {proj.links.map((link, k) => (
                     <a
                       key={k}
-                      className="underline text-blue-600 dark:text-blue-400 text-xs"
+                      className="underline text-primary-700 dark:text-primary-400 text-sm"
                       href={link.url}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -270,38 +256,37 @@ const ResumePDFScreen: React.FC = () => {
             </div>
           ))}
         </section>
-
-        {/* Skills */}
-        <div>
-          <h2 className="text-lg font-bold mb-4 tracking-widest ">SKILLS</h2>
-          <ul className="flex flex-wrap gap-2">
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+            Skills
+          </h2>
+          <ul className="flex flex-wrap gap-2 justify-center">
             {resume.skills.map((skill, i) => (
               <li
                 key={i}
-                className=" bg-blue-100 text-blue-700  px-3 py-1 rounded-full text-xs font-medium shadow-sm hover:bg-blue-700 transition-colors duration-150"
+                className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-xs font-medium shadow-sm"
               >
                 {skill}
               </li>
             ))}
           </ul>
-        </div>
-        {/* Interests */}
-        <div>
-          <h2 className="text-lg mt-4 font-bold mb-4 tracking-widest ">
-            INTERESTS
+        </section>
+        <section>
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+            Interests
           </h2>
           <ul className="space-y-4">
             {resume.interests.map((interest, i) => (
               <li key={i}>
-                <div className="font-semibold text-base  mb-1">
+                <div className="font-semibold text-base mb-1">
                   {interest.title}
                 </div>
-                <div className="text-xs  leading-relaxed">{interest.desc}</div>
+                <div className="text-sm leading-relaxed">{interest.desc}</div>
               </li>
             ))}
           </ul>
-        </div>
-      </main>
+        </section>
+      </motion.section>
     </div>
   );
 };

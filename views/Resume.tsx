@@ -22,7 +22,7 @@ export const Resume: React.FC = () => {
       </div>
 
       {/* Resume Content */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white max-w-5xl dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         {/* Personal Header */}
         <div className="p-8" style={{ backgroundColor: "#EBE0D9" }}>
           <div className="text-left">

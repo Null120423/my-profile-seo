@@ -7,7 +7,7 @@ export default function LoadingView() {
         <div className="relative mb-4 w-20 h-20 flex items-center justify-center">
           {/* Spinning circle */}
           <span
-            className="absolute inset-0 rounded-full border-4 border-secondary-400 border-t-secondary-600 animate-spin"
+            className="absolute inset-0 rounded-full border-4 border-secondary-800 border-t-secondary-800 animate-spin"
             style={{
               borderRightColor: "transparent",
               borderBottomColor: "transparent",
