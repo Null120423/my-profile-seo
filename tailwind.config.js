@@ -49,4 +49,7 @@ module.exports = {
       addUtilities(newUtilities, ["responsive", "hover"]);
     },
   ],
+  future: {
+    disableColorOpacityUtilitiesByDefault: true,
+  },
 };
