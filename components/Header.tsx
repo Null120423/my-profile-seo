@@ -12,7 +12,7 @@ const navItems = [
   { path: "/portfolio", label: "Portfolio" },
   { path: "/resume", label: "Resume" },
   { path: "/favourites", label: "Favourites" },
-  { path: "/blog", label: "Blog" },
+  { path: "/blog", label: "My-sharing" },
   { path: "/workplace", label: "Workplace" },
 ];
 
@@ -51,14 +51,14 @@ export const Header: React.FC = () => {
 
             {/* Mobile menu button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-        
+
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200">

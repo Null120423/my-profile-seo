@@ -7,7 +7,7 @@ export const Blog: React.FC = () => {
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 px-4">
       <div className="max-w-3xl mx-auto w-full">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-          My Blog
+          My Sharing
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 text-center">
           Thoughts on web development, programming best practices, and the

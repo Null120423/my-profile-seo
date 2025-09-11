@@ -3,8 +3,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Github, Linkedin } from "lucide-react";
 import React, { useRef } from "react";
 
-import { USER_DATA } from "@/lib/data";
-
 export const SimpleHome: React.FC = () => {
   const arrowRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
@@ -30,11 +28,11 @@ export const SimpleHome: React.FC = () => {
       >
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-tight">
-            Hi, I'm {USER_DATA.fullName.split(" ")[0]}{" "}
-            {USER_DATA.fullName.split(" ")[1]}
+            Hi, I'm Tran Huu Tai
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 font-light mb-12">
-            I design and build things.
+            I design and build mobile, web, SEO-friendly, and user-centric
+            applications.
           </p>
 
           {/* Scroll indicator with parallax arrow */}
@@ -73,28 +71,57 @@ export const SimpleHome: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed font-light">
-                I am a careful Fullstack Developer who wants to create clean and
-                high-quality products. I like coding and always try to learn new
-                things to improve my skills and work better.
+                I am Tran Huu Tai, a passionate{" "}
+                <span className="font-semibold text-primary-700">
+                  Mobile Developer
+                </span>
+                ,{" "}
+                <span className="font-semibold text-primary-700">
+                  Web Developer
+                </span>
+                ,{" "}
+                <span className="font-semibold text-primary-700">
+                  Web SEO Specialist
+                </span>
+                , and{" "}
+                <span className="font-semibold text-primary-700">
+                  DevOps Practitioner
+                </span>
+                .
               </p>
-
               <p className="text-lg text-gray-700 leading-relaxed font-light">
-                Besides coding, I enjoy traveling and discovering new places,
-                which gives me more ideas and helps me solve problems. I believe
-                in writing clean, maintainable code that stands the test of
-                time.
+                I specialize in building high-quality, scalable applications
+                using modern technologies such as React Native, React.js,
+                NestJS, and Java Spring Boot. My experience covers both frontend
+                and backend development, mobile and web platforms, and
+                optimizing for SEO and performance.
               </p>
-
               <p className="text-lg text-gray-700 leading-relaxed font-light">
-                With experience in React, Node.js, and modern web technologies,
-                I focus on creating solutions that are both technically sound
-                and user-friendly. Every project is an opportunity to learn
-                something new and push the boundaries of what's possible.
+                I am always eager to learn new things, improve my skills, and
+                deliver clean, maintainable code. I enjoy solving complex
+                problems, optimizing user experiences, and ensuring robust
+                DevOps and deployment pipelines for reliable delivery.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed font-light">
+                Besides coding, I love traveling and exploring new places, which
+                inspires creativity and helps me approach challenges with a
+                fresh perspective. My goal is to create products that not only
+                work well but also make a positive impact for users and
+                businesses.
               </p>
             </div>
-
             <div className="flex justify-center lg:justify-end">
-              <div className="w-80 h-96 bg-gray-300 rounded-lg" />
+              <div className="w-full h-full bg-gray-300 rounded-lg">
+                <img
+                  alt="Profile"
+                  className="w-full h-full object-cover rounded-lg grayscale"
+                  src="/about-me.jpg"
+                />
+
+                <div className="center flex justify-center items-center p-2">
+                  (My favorite travel destination in Phan Rang City)
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -173,6 +200,7 @@ export const SimpleHome: React.FC = () => {
                 <p className="text-gray-600">Ton Duc Thang University</p>
                 <div className="w-full lg:w-auto border-b border-gray-300 lg:border-b-0 lg:border-r lg:pr-8 pb-4 lg:pb-0">
                   <p className="text-sm text-gray-500">2021 - 2025</p>
+                  <p className="text-sm text-gray-500">GPA: 8.21 / 10</p>
                 </div>
               </div>
 
