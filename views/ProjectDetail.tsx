@@ -4,12 +4,12 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { useState } from "react";
 
 import RenderMarkdown from "../components/RenderMarkdown";
-import { portfolioData } from "../data/portfolioData";
 
 import { NotFound } from "./NotFound";
 
 import ImgWithPreview from "@/components/ui/ImgWithPreview";
 import TransitionLink from "@/components/ui/TransitionLink";
+import { portfolioData } from "@/data/portfolioData";
 
 type ProjectDetailProps = {
   params: { id: string };
@@ -29,13 +29,9 @@ export const ProjectDetail = ({ params }: ProjectDetailProps) => {
     setSelectedImage(imageSrc);
   };
 
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
-
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 px-4">
-      <div className="max-w-3xl mx-auto w-full space-y-8">
+      <div className="max-w-7xl mx-auto w-full space-y-8">
         {/* Back Button */}
         <div className="mb-4">
           <TransitionLink

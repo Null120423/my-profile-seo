@@ -1,3 +1,5 @@
+import { DJPRO } from "./d-joy";
+
 export interface Project {
   id: string;
   title: string;
@@ -251,4 +253,5 @@ To protect resources and enforce workflow discipline, the app implements **RBAC*
       "https://pub-8522858fd58049a6b24d543265789c51.r2.dev/app-img-banner/Screenshot%202025-07-15%20at%2022.18.09.png",
     ],
   },
+  DJPRO,
 ];

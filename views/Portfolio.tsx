@@ -2,15 +2,14 @@
 import { motion } from "framer-motion";
 import { Eye } from "lucide-react";
 
-import { portfolioData } from "../data/portfolioData";
-
 import TransitionLink from "@/components/ui/TransitionLink";
+import { portfolioData, Project } from "@/data/portfolioData";
 
 export const Portfolio: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-4xl mx-auto w-full text-center">
+        <div className="max-w-7xl mx-auto w-full text-center">
           <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-tight">
             Portfolio
           </h1>
@@ -18,7 +17,7 @@ export const Portfolio: React.FC = () => {
             A collection of projects I've built using modern web technologies.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {portfolioData.map((project) => (
+            {portfolioData.map((project: Project) => (
               <motion.div
                 key={project.id}
                 animate={{ opacity: 1, y: 0 }}
@@ -31,16 +30,18 @@ export const Portfolio: React.FC = () => {
                   className="relative overflow-hidden cursor-pointer block"
                   href={`/portfolio/${project.id}`}
                 >
-                  <img
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    src={project.image}
-                  />
-                  <div className="absolute inset-0 bg-black/10 bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
-                    <Eye
-                      className="text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                      size={32}
+                  <div className="w-full aspect-[21/9] bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                    <img
+                      alt={project.title}
+                      className="w-full h-62 object-contain group-hover:scale-105 transition-transform duration-300"
+                      src={project.image}
                     />
+                    <div className="absolute inset-0 bg-black/10 bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
+                      <Eye
+                        className="text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                        size={32}
+                      />
+                    </div>
                   </div>
                 </TransitionLink>
                 <div className="p-6 space-y-2">

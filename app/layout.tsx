@@ -70,7 +70,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" storageKey="my-profile-theme">
           <StaticLoadingScreen />
           <Header />
-          <main className="pt-16 relative">
+          <main className="pt-16 relative mb-10">
             {children}
 
             <FloatingContact />

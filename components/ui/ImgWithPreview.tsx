@@ -11,7 +11,6 @@ import {
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
-import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 
 interface ImgWithPreviewProps {
@@ -249,12 +248,9 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
           </div>
         )}
         {fill ? (
-          <Image
-            fill
+          <img
             alt={alt}
             className="object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
-            priority={priority}
-            quality={quality}
             sizes={
               sizes ||
               "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -269,12 +265,9 @@ const ImgWithPreview: React.FC<ImgWithPreviewProps> = ({
             onLoad={handleImageLoad}
           />
         ) : (
-          <Image
+          <img
             alt={alt}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
-            height={height}
-            priority={priority}
-            quality={quality}
             src={imageUrl}
             style={{
               opacity: imageLoading ? 0.5 : 1,
