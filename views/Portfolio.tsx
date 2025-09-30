@@ -1,80 +1,49 @@
 "use client";
 import { motion } from "framer-motion";
-import { Eye } from "lucide-react";
 
-import TransitionLink from "@/components/ui/TransitionLink";
-import { portfolioData, Project } from "@/data/portfolioData";
+import ProjectCard from "@/components/ui/ProjectCard";
+import { portfolioData } from "@/data/portfolioData";
 
 export const Portfolio: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-7xl mx-auto w-full text-center">
-          <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-tight">
-            Portfolio
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 font-light mb-12">
-            A collection of projects I've built using modern web technologies.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {portfolioData.map((project: Project) => (
-              <motion.div
-                key={project.id}
-                animate={{ opacity: 1, y: 0 }}
-                className="group bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all"
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                whileHover={{ y: -5 }}
-              >
-                <TransitionLink
-                  className="relative overflow-hidden cursor-pointer block"
-                  href={`/portfolio/${project.id}`}
-                >
-                  <div className="w-full aspect-[21/9] bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                    <img
-                      alt={project.title}
-                      className="w-full h-62 object-contain group-hover:scale-105 transition-transform duration-300"
-                      src={project.image}
-                    />
-                    <div className="absolute inset-0 bg-black/10 bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
-                      <Eye
-                        className="text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                        size={32}
-                      />
-                    </div>
-                  </div>
-                </TransitionLink>
-                <div className="p-6 space-y-2">
-                  <TransitionLink
-                    className="text-xl font-bold text-gray-900 dark:text-white cursor-pointer hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                    href={`/portfolio/${project.id}`}
-                  >
-                    {project.title}
-                  </TransitionLink>
-                  <p className="text-gray-600 dark:text-gray-300 text-base font-light">
-                    {project.subTitle}
-                  </p>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded text-sm">
-                        +{project.technologies.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden py-20">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+              Portfolio
+            </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto" />
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              A collection of projects built with modern technologies and
+              innovative solutions
+            </p>
+          </motion.div>
         </div>
+      </div>
+
+      {/* Projects Grid */}
+      <div className="max-w-7xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
+          {portfolioData.map((project, index) => (
+            <ProjectCard key={project.id} index={index} project={project} />
+          ))}
+        </div>
+      </div>
+
+      {/* Background Elements */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-10 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl" />
       </div>
     </div>
   );
 };
+
+export default Portfolio;

@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import { KEYWORDS, LOGO, USER_DATA } from "@/lib/data";
 import { ProjectDetail } from "@/views/ProjectDetail";
-import { Metadata } from "next";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -35,5 +36,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDetailPage({ params }: Props) {
   const inputParams = await params;
+
   return <ProjectDetail params={inputParams} />;
 }

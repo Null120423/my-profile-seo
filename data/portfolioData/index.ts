@@ -1,4 +1,5 @@
 import { DJPRO } from "./d-joy";
+import { FNB } from "./fnb";
 
 export interface Project {
   id: string;
@@ -12,6 +13,13 @@ export interface Project {
   isPrivate?: boolean;
   imgs: string[];
   subTitle: string;
+  summary: string;
+  responsibilities: string[];
+  keyFeatures: string[];
+  impact: string;
+  additionalLinks: { label: string; url: string }[];
+  role: string;
+  teamSize: number;
 }
 
 export const portfolioData: Project[] = [
@@ -147,6 +155,41 @@ Through this project, our team aims to:
       "https://pub-8522858fd58049a6b24d543265789c51.r2.dev/app-img-banner/Screenshot%202025-07-15%20at%2020.58.51.png",
       "https://pub-8522858fd58049a6b24d543265789c51.r2.dev/app-img-banner/Screenshot%202025-07-15%20at%2020.58.59.png",
     ],
+    summary:
+      "A smart travel assistant app helping international tourists overcome language barriers, navigation issues, and trip planning challenges while exploring Ho Chi Minh City.",
+    responsibilities: [
+      "Backend (NestJS): Designed and developed RESTful APIs, integrated third-party systems, and managed PostgreSQL database.",
+      "Frontend (Android – Jetpack Compose): Built and optimized mobile UI/UX, connected to backend services, and improved usability.",
+      "Data Collection: Collected and prepared image datasets (landmarks, food) for AI training and evaluation.",
+      "AI Development: Integrated a pre-trained Computer Vision model (YOLO) for local landmark and food recognition.",
+      "Implemented RAG-based prompting with external LLMs to deliver context-aware travel recommendations while reducing hallucinations.",
+    ],
+    keyFeatures: [
+      "Food and location classification in Ho Chi Minh City",
+      "Trip planning for travelers",
+      "AI-powered chatbot support for travelers",
+      "RAG to reduce token usage and search location data (using vector search in PostgreSQL with the vector extension)",
+      "JWT, secret keys, and device ID for authentication",
+      "Push notifications (via FCM tokens)",
+      "OTA updates for the app (CodePush)",
+      "Trip visualization on maps (using Google Maps and processed location data)",
+      "Scheduling feature (single-service scheduling)",
+      "Deployment with Kubernetes for the main system server",
+      "Schedule API deployed with Nginx on Ubuntu 22.04",
+      "CI/CD with GitHub Actions pipeline",
+      "Integrated offline AI models into the Android app",
+      "Integrated SePay for payment module",
+    ],
+    impact:
+      "Delivered a personalized, reliable, and interactive travel assistant that enhances the experience of foreign tourists and promotes Ho Chi Minh City's culture through technology.",
+    additionalLinks: [
+      {
+        label: "Project Landing Page",
+        url: "https://hodos-admin.gitlabserver.id.vn/landing",
+      },
+    ],
+    role: "Full-stack contributor (Mobile & Backend Development), Data Collector, Researcher",
+    teamSize: 2,
   },
   {
     id: "2",
@@ -252,6 +295,38 @@ To protect resources and enforce workflow discipline, the app implements **RBAC*
       "https://pub-8522858fd58049a6b24d543265789c51.r2.dev/app-img-banner/Screenshot%202025-07-15%20at%2022.18.18.png",
       "https://pub-8522858fd58049a6b24d543265789c51.r2.dev/app-img-banner/Screenshot%202025-07-15%20at%2022.18.09.png",
     ],
+    role: "Mobile App Developer, Backend Developer",
+    teamSize: 2,
+
+    summary:
+      "A social networking platform that fosters meaningful interactions by connecting users through shared activities. The system is designed with a hybrid architecture that combines event-driven microservices, secure role-based access, and scalable infrastructure for real-time engagement.",
+
+    responsibilities: [
+      "Backend (NestJS): Designed microservices for user, matching, appointment, and notification services.",
+      "Implemented event-driven architecture for real-time updates and system responsiveness.",
+      "Developed secure Role-Based Access Control (RBAC) and data persistence with PostgreSQL.",
+      "Mobile App (React Native): Built cross-platform UI, integrated APIs, and optimized user flows for activity management and matching.",
+      "Configured CI/CD pipelines with GitHub Actions and containerized deployment using Docker.",
+      "Managed AWS S3 for media storage and applied Saga Pattern for complex transaction workflows.",
+    ],
+
+    keyFeatures: [
+      "Activity-based user matching and social connection.",
+      "Real-time updates via event-driven architecture.",
+      "Role-Based Access Control (RBAC) for secure access management.",
+      "Cross-platform mobile app with React Native.",
+      "Scalable microservices backend with NestJS.",
+      "Saga Pattern for distributed transaction handling.",
+      "Media storage and retrieval using AWS S3.",
+      "CI/CD automation with GitHub Actions.",
+      "Containerized deployment with Docker.",
+    ],
+
+    impact:
+      "Enhanced social interaction by enabling users to discover and connect through activities in real time. Delivered a scalable and secure architecture that supports growth, encourages community engagement, and ensures a seamless user experience.",
+
+    additionalLinks: [],
   },
   DJPRO,
+  FNB,
 ];

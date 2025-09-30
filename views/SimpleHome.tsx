@@ -3,6 +3,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Github, Linkedin } from "lucide-react";
 import React, { useRef } from "react";
 
+import ProjectCard from "@/components/ui/ProjectCard";
+import { portfolioData } from "@/data/portfolioData";
+
 export const SimpleHome: React.FC = () => {
   const arrowRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
@@ -16,8 +19,10 @@ export const SimpleHome: React.FC = () => {
     });
   };
 
+  const featuredProjects = portfolioData.filter((project) => project.featured);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Hero Section */}
       <motion.section
         className="min-h-screen flex items-center justify-center px-4"
@@ -234,6 +239,35 @@ export const SimpleHome: React.FC = () => {
         </div>
       </motion.section>
 
+      {/* Projects Section */}
+      <div className="max-w-6xl mx-auto px-6 pb-20">
+        <div className="relative overflow-hidden py-16">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                Featured Projects
+              </h1>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto" />
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Explore my latest work showcasing innovative solutions,
+                technical expertise, and measurable impact
+              </p>
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.id} index={index} project={project} />
+          ))}
+        </div>
+      </div>
+
       {/* Contact Section */}
       <motion.section
         className="min-h-screen flex items-center justify-center px-4 py-20"
@@ -284,6 +318,12 @@ export const SimpleHome: React.FC = () => {
           </div>
         </div>
       </motion.section>
+
+      {/* Background Decorations */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl" />
+      </div>
     </div>
   );
 };
